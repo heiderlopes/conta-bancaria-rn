@@ -6,6 +6,8 @@ import {
   Image,
 } from 'react-native';
 
+import Colors from '../../config/Colors';
+
 export default class Header extends Component {
 
   render(){
@@ -28,7 +30,7 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
   container: {
     height: 230,
-    backgroundColor: '#de5a5b',
+    backgroundColor: Colors.headerBackgroundColor,
     //alignItems: 'center',
   },
   topHeader: {
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
   },
   rightText: {
     alignContent: 'center', 
-    color: '#FFF',
+    color: Colors.headerTextColor,
     fontWeight: 'bold'
   },
   titleArea: {
@@ -57,6 +59,6 @@ const styles = StyleSheet.create({
   title: {
     padding: 8,
     fontSize: 32,
-    color:'#FFFFFF',
+    color: Colors.headerTextColor,
   },  
 });

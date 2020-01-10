@@ -6,6 +6,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import Colors from '../../config/Colors';
+
 export default class Button extends Component {
 
     render() {
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
         width: 230,
         height: 50,
         borderWidth: 2,
-        borderColor: '#de5a5b',
+        borderColor: Colors.accentColor,
         borderRadius: 25,
         alignSelf: 'center',
         margin: 32
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
     btnTexto: {
         fontSize: 18,
         //fontWeight: 'bold',
-        color: '#de5a5b'
+        color: Colors.primaryColor
     }
 });

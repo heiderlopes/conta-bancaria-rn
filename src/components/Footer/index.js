@@ -5,6 +5,8 @@ import {
   Text,
 } from 'react-native';
 
+import Colors from '../../config/Colors';
+
 export default class Footer extends Component {
 
   render(){
@@ -18,14 +20,13 @@ export default class Footer extends Component {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: '#f3f3f3',
+    backgroundColor: Colors.footerBackground,
     alignItems: 'center',
   },
   title: {
     padding: 8,
     fontSize: 16,
     fontStyle: 'italic',
-    color: '#444'
-    //color:'#FFFFFF',
+    color: Colors.footerText
   },  
 });

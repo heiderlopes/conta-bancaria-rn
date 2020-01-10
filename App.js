@@ -21,19 +21,26 @@ import Header from './src/components/Header';
 import Footer from './src/components/Footer';
 import FormNewUser from './src/components/FormNewUser';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import Colors from './src/config/Colors';
+
 export default class App extends Component {
 
   render(){
+
     return(
       <>
-        <StatusBar barStyle="dark-content" backgroundColor="#de5a5b"/>
-        <SafeAreaView style={styles.safeArea}>
-          <ScrollView
-            style={styles.scrollView}>
-              <Header /> 
-            <FormNewUser />
+        <SafeAreaView style={{ flex: 0, backgroundColor: Colors.safeAreaBackgroundTopColor }} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: Colors.safeAreaBackgroundBottomColor }}>
+          <StatusBar barStyle="dark-content" backgroundColor={Colors.statusBar}/>
+          <View style={styles.container}>
+            <KeyboardAwareScrollView style={{flex:1}}>
+              <Header />
+              <FormNewUser />
+            </KeyboardAwareScrollView>
             <Footer />
-          </ScrollView>
+          </View>
         </SafeAreaView>
       </>
     )

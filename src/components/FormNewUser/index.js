@@ -8,9 +8,7 @@
 
 import React, { Component } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   TextInput,
@@ -20,17 +18,32 @@ import {
 
 import Button from '../Button';
 
+import {Dropdown } from 'react-native-material-dropdown';
+
+import Colors from '../../config/Colors';
+
 export default class FormNewUser extends Component {
 
     constructor(props) {
         super(props);
+        
         this.state = {
             name: '',
             age: 0,
-            gender: ''
-
+            gender: '',
+            genders: [{value: 'Masculino'}, {value: 'Feminino'}]
         }
     };
+
+    onAgeChanged(e) {
+        if(e.length == 0) {
+            this.setState({ myNumber: e });  
+        } else {
+            if (/^\d+$/.test(e.toString())) { 
+                this.setState({ myNumber: e });
+              }
+        }
+    }
 
     render(){
         return(
@@ -46,11 +59,23 @@ export default class FormNewUser extends Component {
 
                         <Text style={styles.titleField}>Qual a sua idade?</Text>
                         <TextInput
+                            keyboardType="numeric"
                             placeholder="Ex: 32"
                             style={styles.input}
+                            onChangeText = {(e)=> this.onAgeChanged(e)}
+                            maxLength={3}
+                            value = {this.state.myNumber}
                         />
-                        <Text style={styles.titleField}>Qual seu sexo?</Text>
                         
+                        <Text style={styles.titleField}>Qual seu sexo?</Text>
+
+                        <Dropdown
+                            containerStyle={styles.dropDown}
+                            label= ""
+                            labelHeight={0}
+                            style = {{fontWeight: "normal", marginTop: 0}}
+                            baseColor = {Colors.accentColor}
+                            data={this.state.genders}/>
                         <Button text="Cadastrar" style={styles.button}/>
                     </View>
                 </View>
@@ -62,14 +87,14 @@ export default class FormNewUser extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: Colors.backgroundColor,
   },
   content: {
     flex: 1,
     marginTop: -48,
     marginBottom: 4,
     margin: 16,
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.formBackground,
     borderRadius: 8,
     padding: 20
   },
@@ -77,12 +102,12 @@ const styles = StyleSheet.create({
     margin: 16,
     fontSize: 18,
     alignSelf: 'center',
-    color: '#de5a5b',
+    color: Colors.accentColor,
     fontWeight: 'bold'
   },
   titleField: {
     fontSize: 14,
-    color: '#de5a5b',
+    color: Colors.accentColor,
     fontWeight: 'bold',
     ...Platform.select({
         ios: {
@@ -93,8 +118,20 @@ const styles = StyleSheet.create({
         },
     }),
   },
+
+  dropDown: {
+    ...Platform.select({
+        ios: {
+            marginVertical: 0,
+        },
+        android: {
+            marginTop: 12,
+        },
+    }),
+  },
+
   input: {
-      borderColor: '#de5a5b',
+      borderColor: Colors.accentColor,
       fontSize: 16,
       borderBottomWidth: 1
   },
