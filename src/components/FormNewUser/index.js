@@ -22,6 +22,8 @@ import {Dropdown } from 'react-native-material-dropdown';
 
 import Colors from '../../config/Colors';
 
+import Slider from '@react-native-community/slider';
+
 export default class FormNewUser extends Component {
 
     constructor(props) {
@@ -31,7 +33,8 @@ export default class FormNewUser extends Component {
             name: '',
             age: 0,
             gender: '',
-            genders: [{value: 'Masculino'}, {value: 'Feminino'}]
+            genders: [{value: 'Masculino'}, {value: 'Feminino'}],
+            valor: 0
         }
     };
 
@@ -76,7 +79,24 @@ export default class FormNewUser extends Component {
                             style = {{fontWeight: "normal", marginTop: 0}}
                             baseColor = {Colors.accentColor}
                             data={this.state.genders}/>
-                        <Button text="Cadastrar" style={styles.button}/>
+
+                        <Text style={styles.titleField}>Defina seu limite</Text>
+
+                        <Slider 
+                            step={1}
+                            style={styles.slider}
+                            minimumTrackTintColor="#de5a5b"
+                            maximumTrackTintColor="#ddd"
+                            thumbTintColor="#de5a5b"
+                            minimumValue={0}
+                            maximumValue={2000}
+                            onValueChange={(valorSelecionado) => {this.setState({valor: valorSelecionado})}}
+                            value={this.state.valorSelecionado}
+                        />
+
+                        <Text style={styles.sliderFooter}>Seu limite é de R$ {this.state.valor},00</Text>
+
+                        <Button text="Criar conta" style={styles.button}/>
                     </View>
                 </View>
 
@@ -128,6 +148,34 @@ const styles = StyleSheet.create({
             marginTop: 12,
         },
     }),
+  },
+  slider: {
+    fontSize: 14,
+    color: Colors.accentColor,
+    fontWeight: 'bold',
+    ...Platform.select({
+        ios: {
+            marginVertical: 0,
+        },
+        android: {
+            marginTop: 16,
+        },
+    })
+  },
+
+  sliderFooter: {
+    fontSize: 14,
+    color: '#888',
+    fontWeight: 'bold',
+    ...Platform.select({
+        ios: {
+            marginVertical: 16,
+        },
+        android: {
+            marginTop: 16,
+        },
+    }),
+    alignSelf: 'center'
   },
 
   input: {
