@@ -32,6 +32,7 @@ export default class FormNewUser extends Component {
         super(props);
         
         this.inputName = React.createRef();
+        this.inputAge = React.createRef();
 
         this.state = {
             name: '',
@@ -87,9 +88,26 @@ export default class FormNewUser extends Component {
         if(this.state.name == '') {
             alert("Informe o nome do cliente");
             this.inputName.current.focus();
-            return false;
+            return;
         } 
+
+        if(this.state.age == '') {
+            alert("Informe uma idade válida");
+            this.inputAge.current.focus();
+            return;
+        }
+
+        if(this.state.gender == '') {
+            alert("Informe o sexo");
+            return;
+        }
         
+        if(this.state.accountLimit == 0) {
+            alert("Informe o limite para sua conta");
+            return;
+        }
+
+
         this.showAlertConfirmData();
     }
 
@@ -111,6 +129,7 @@ export default class FormNewUser extends Component {
 
                         <Text style={styles.titleField}>Qual a sua idade?</Text>
                         <TextInput
+                            ref={this.inputAge}
                             keyboardType="numeric"
                             placeholder="Ex: 32"
                             style={styles.input}
@@ -122,6 +141,7 @@ export default class FormNewUser extends Component {
                         <Text style={styles.titleField}>Qual seu sexo?</Text>
 
                         <Dropdown
+                            ref={this.inputGender}
                             onChangeText={(value) => this.setState({gender: value})}
                             containerStyle={styles.dropDown}
                             label= ""
